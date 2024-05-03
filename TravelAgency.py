@@ -17,7 +17,7 @@ print("----------------------------------------")
 
 def user_data():
     username = input("\nPlease enter your name: ")
-    print(f'\nWelcome {username}, to improve your experience fillout the next data required')
+    print(f'\nWelcome {username}, to improve your experience fillout the next data required\n')
     budget = input("Please enter your budget so we can offer the best choices for you: ")
     return int(budget)
 
@@ -44,9 +44,9 @@ def summer(user):
     traveling_summer = 400
     activities =input("\nDo you want to do extreme sports or activities on the beaches?: (sports/beaches) ").lower()
     if activities == "sports":
-        message = "\nWhat a wonderfull chice! We offer hiiking and extreme sports in SPAIN!!! "
+        message = "\nWhat a wonderfull choice! We offer hiiking and extreme sports in SPAIN!!!. This will cost you 400$"
     elif activities == "beaches":
-        message = "\nBeach lovers unite! We offer all kind of activities on the beaches from PORTUGAL"
+        message = "\nBeach lovers unite! We offer all kind of activities on the beaches from PORTUGAL. This will cost you 400$"
     else:
         message = "\nInvalid activity. Please type 'Sports' or 'Beaches'. Try Again."
     
@@ -62,9 +62,9 @@ def spring(user):
     traveling_spring = 300
     activities = input("\nThis season we have options to play sports or go on a tour, which one do you prefer?: (sports/tour) ").lower()
     if activities == "sports":
-        message = "\nWhat a wonderfull chice! We offer hiiking and extreme sports in FRANCE!!! "
+        message = "\nWhat a wonderfull chice! We offer hiiking and extreme sports in FRANCE!!!. This will cost you 300$ "
     elif activities == "tour":
-        message = "\nCultural and historical tours in ITALY are very popular at this season. Have and excellent trip."
+        message = "\nCultural and historical tours in ITALY are very popular at this season. Have and excellent trip. This will cost you 300$"
     else:
         message = "\nInvalid activity. Please type 'Sports' or 'Tour'. Try Again."
     saving = user - traveling_spring
@@ -79,9 +79,9 @@ def autumn(user):
     traveling_autumn = 200
     activities = input("\nThis season we have options to play sports or do cultural activities, which one do you prefer?: (sports/activities) ").lower()
     if activities == "sports":
-        message = "\nWhat a wonderfull chice! We offer hiiking and extreme sports in BELGIUM!!! "
+        message = "\nWhat a wonderfull chice! We offer hiiking and extreme sports in BELGIUM!!!. This will cost you 200$ "
     elif activities == "tour":
-        message = "\nCultural and historical activities in AUSTRIA are very popular at this season. Have and excellent trip."
+        message = "\nCultural and historical activities in AUSTRIA are very popular at this season. Have and excellent trip. This will cost you 200$"
     else:
         message = "\nInvalid activity. Please type 'Sports' or 'Tour'. Try Again."
 
