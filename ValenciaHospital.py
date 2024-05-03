@@ -60,43 +60,77 @@ class Doctor:
         self.name = name
         self.surname = surname
         self.speciality = speciality
+        self.appointments = []
+
+    def add_appointment(self, appointment):
+        self.appointments.append(appointment)
+
+    def is_available(self, date, time):
+        for appointment in self.appointments:
+            if appointment.date == date and appointment.time == time:
+                return False
+        return True
 
         
     def show_speciality(self,speciality):
         if self.speciality == 1:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 2:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 3:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 4:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif speciality == 5 and self.speciality == 5:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 6:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 7:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 8:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
         elif self.speciality == 9:
-            print(f"Doctor Name: {self.name} {self.surname}")
+            print(f"Doctor Name: {self.name} {self.surname} \n")
 
 
 class Appointment:
-    def __init__(self, date, time, doctor, patient):
-        self.date = date
-        self.time = time
-        self.doctor = doctor
-        self.patient = patient
+    def __init__(self):
+        self.patient_name = ""
+        self.date = ""
+        self.time = ""
+        self.doctor = ""
+
     
-    def display_appoinment(self):
-        print(f"\tDate: {self.date}, \n\tTime: {self.time}, \n\tDoctor: {self.doctor}, \n\tPatient: {self.patient}")
-    
-    def create_appoinment(self):
-        print("\nYou are going to create a new appoinment")
-        patient_name=input("\tEnter the patient's name: ")
-        speciality = specialitys()
+    def create_appoinment(self,doctors1,doctors2):
+        print("\nYou are going to create a new appoinment\n")
+        self.patient_name=input("\tEnter the patient's name: ")
+        time = input("\nTo confirm the time slot, please introduce the time slot of your preference, morning/afternoon: \n")
+        if time == "morning":
+            self.date = input("\tEnter the day of the appointment (DD/MM/YY): ")
+            hours_available = ["8:00", "10:00", "11:00", "12:00", "13:00"]
+            print("\n"+str(hours_available)+"\n")
+            self.time = input("\tChoose an available hour from this list: ")
+            if self.time in hours_available:
+                self.doctor = input("Enter the doctor's name: ").capitalize()
+                for doctor in doctors1:
+                    if self.doctor == doctor.name:
+                        if doctor.is_available(self.date, self.time):
+                            doctor.add_appointment(self)
+                            print("You have created a new appointment.")
+                            print(f'\t Patient Name: {self.patient_name}')
+                            print(f"\t Date: {self.date}")
+                            print(f"\t Hour: {self.time}")
+                            print(f"\t Doctors Name: {self.doctor}")
+                        else:
+                            print("The doctor is not available at that time.")
+                        break
+                if self.doctor not in [doctor.name for doctor in doctors1]:
+                    print("The doctor that you have selected does not exist in our system. Please try again.")
+        elif time == "afternoon":
+            self.date = input("\tEnter the day of the appointment (DD/MM/YY): ")
+            hours_available = ["14:00","16:00","17:00","18:00","20:00"]
+            chosen_hour = input("\tChoose an available hour from this list")
+
         
 
 
@@ -120,7 +154,7 @@ if __name__ == "__main__":
         speciality = int(input("\tWrite the number of the speciality that you want do an appoinment: "))
         return speciality
     
-    def specialitys_morning(speciality,doctores1,doctores2):
+    def specialitys_time(speciality,doctores1,doctores2):
         time = input("\nDo you want to set an appointment in the morning or in the afternoon?: (morning/afternoon) ").lower()
         if time == "morning":
             for doctor in doctores1:
@@ -146,13 +180,35 @@ if __name__ == "__main__":
                     elif speciality == 9:
                         print("\nInternal Medicine Doctors")
                     doctor.show_speciality(speciality)
+                    message = "This are the available doctors for the morning time"
         elif time == "afternoon":
             for doctor in doctores2:
                 if doctor.speciality == speciality:
+                    if speciality < 1 and speciality > 9:
+                        print("Invalid option.\nPlease select a valid option.")
+                    elif speciality == 1:
+                        print("\nGeneral Medicine Doctors")
+                    elif speciality == 2:
+                        print("\nEmergency Care Doctors")
+                    elif speciality == 3:
+                        print("\nClinical Analysis")            
+                    elif speciality == 4:
+                        print("\nCardiology Doctors")           
+                    elif speciality == 5:
+                        print("\nNeurolgy Doctors")
+                    elif speciality == 6:
+                        print("\nNutrition Specialist")
+                    elif speciality == 7:
+                        print("\nPhysiotherapists")
+                    elif speciality == 8:
+                        print("\nTraumautology Doctors")
+                    elif speciality == 9:
+                        print("\nInternal Medicine Doctors")
                     doctor.show_speciality(speciality)
+                    message = "This are the available doctors for the afternoon time"
         else:
             print("\nError. Please enter only the word morning or afternoon, depending of your preference")
-
+        return message
 
     
     speciality = specialitys()
@@ -185,4 +241,7 @@ if __name__ == "__main__":
     doctor27 = Doctor("Benjamin", "Warren",7)
     doctores1 = [doctor1,doctor2,doctor3,doctor4,doctor5,doctor6,doctor7,doctor8,doctor9,doctor10,doctor11,doctor26,doctor27]
     doctores2 = [doctor12,doctor13,doctor14,doctor15,doctor16,doctor17,doctor18,doctor19,doctor20,doctor21,doctor22,doctor23,doctor24,doctor25]
-    print(specialitys_morning(speciality,doctores1,doctores2))
+    print(specialitys_time(speciality,doctores1,doctores2))
+    appointment = Appointment()
+    appointment.create_appoinment(doctores1,doctores2)
+    print(appointment)
