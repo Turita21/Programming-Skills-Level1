@@ -189,6 +189,7 @@ def return_menu():
         else:
             ctnue = False
             print("\n\nGoodbye!. Thanks for using the Manchester United System. Please come again.\n\n")
+            break
             
 
 def main(choice):
