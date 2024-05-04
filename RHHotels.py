@@ -95,21 +95,31 @@ def hotels():
     print("\t 4- VIP Suite\n")
     print("\t 5- Luxury Suite\n")
     number_of_rooms = int(input("How many rooms do you  want? "))
-    room_type = int(input("Enter the number of the room: "))
     
-    if room_type == 1:
-        room = "Single room"
-    elif room_type == 2:
-        room = "Double room"
-    elif room_type == 3:
-        room = "Group room"
-    elif room_type == 4:
-        room = "VIP Suite"
-    elif room_type == 5:
-        room = "Luxury Suite"
-    else:
-        print("This option is incorrect, please try again.")
-    return room
+    n = 0
+    list_room = []
+    while n < number_of_rooms: 
+        room_type = int(input("\nEnter the number of the room from the list above: "))
+        n += 1
+        if room_type == 1:
+            room = "Single room"
+            print(f"\nThe room {n} is a single room.")
+        elif room_type == 2:
+            room = "Double room"
+            print(f"\nThe room {n} is a double room.")
+        elif room_type == 3:
+            room = "Group room"
+            print(f"\nThe room {n} is a Group room.")
+        elif room_type == 4:
+            room = "VIP Suite"
+            print(f"\nThe room {n} is a VIP suite.")
+        elif room_type == 5:
+            room = "Luxury Suite"
+            print(f"\nThe room {n} is a Luxury suite.")
+        else:
+            print("This option is incorrect, please try again.")
+        list_room.append(room)
+    return list_room
 
 def reservations():
     date = datetime.datetime.now()
@@ -118,12 +128,13 @@ def reservations():
     month = int(input("\tMonth (mm): "))
     year = int(input("\tYear (yyyy): "))
     hour = input("\tHour [hh]: ")
+    if hour > 24:
+        print("You have enter an invalid hour. Please try again.\n")
+        hour = input("\tHour [hh]: ")
     nights =  int(input("\tNumber of nights: "))
 
-
     if day  < date.day or month < date.month or year < date.year:
-        date_reservation =  "\nThe date you entered is invalid.Please, enter a valid date."
-        
+        date_reservation =  "\nThe date you entered is invalid.Please, enter a valid date."      
     else:
         date_CheckIn_reservation = {"Day": day,
                             "Month": month,
@@ -134,14 +145,30 @@ def reservations():
                             "Year": year,
                             "Hour": hour}
         
-    return "Your reservation is set to the following datetime " +  str(date_CheckOut_reservation)
+    return "Your reservation is set to the following datetime " +  str(date_CheckIn_reservation) + " until " + str(date_CheckOut_reservation)
         
-
+def prices(list_room):
+    total = 0
+    for i in list_room:
+        if i == "Single room":
+            price_room =  100
+        elif i == "Double room":
+            price_room = 200
+        elif i == "Group room":
+            price_room = 350
+        elif i == "VIP suite":
+            price_room = 450
+        elif i == "Luxury suite":
+            price_room = 550
+        total += price_room
+    return total
+    
+    
 
 print("------------------------------------------------------------------")
 print("------------------------ WELCOME TO RH HOTELS---------------------")
 
-print(reservations())
+print(prices(["VIP suite"]))
 # account = input("Do you already have an account ? Y/N: ").lower()
 # if account == 'y':
 #     d1 = {"Name":"Coral","Mail address":"cori119","Password":"hagro"}
